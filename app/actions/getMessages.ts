@@ -15,7 +15,8 @@ const getMessages = async (
             orderBy:{
                 createdAt:'asc'
             }
-        })
+        });
+        return messages;
     } catch (error:any) {
         return [];
     }
