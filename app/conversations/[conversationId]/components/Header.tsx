@@ -2,7 +2,7 @@
 
 import useOtherUsers from "@/app/hooks/useOtherUsers";
 import { Conversation, User } from "@prisma/client";
-import { useMemo, useState } from "react";
+import { useMemo, useState,useEffect } from "react";
 import Link from "next/link";
 import { HiChevronLeft, HiEllipsisHorizontal } from "react-icons/hi2";
 import Avatar from "@/app/components/Avatar";
@@ -27,14 +27,26 @@ const Header:React.FC<HeaderProps> = ({
 
         return 'Active';
     },[conversation])
+    const [mounted, setMounted] = useState(false);
 
+        useEffect(() => {
+        setMounted(true);
+        }, []);
     return ( 
         <>
-            <ProfileDrawer 
+            {/* <ProfileDrawer 
             data={conversation}
             isOpen = {drawerOpen}
             onClose = {()=> setDrawerOpen(false)}
+            /> */}
+
+            {mounted && (
+            <ProfileDrawer
+                data={conversation}
+                isOpen={drawerOpen}
+                onClose={() => setDrawerOpen(false)}
             />
+            )}
             <div
             className="bg-white w-full flex border-b-0 sm:px-4 py-3 px-4
             lg:px-6 justify-between items-center shadow-sm"
